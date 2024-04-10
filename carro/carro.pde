@@ -1,6 +1,7 @@
 final float MIN_X = 500;
 final float MAX_X = 500;
-final color corDoCarro = #00FF00; // Vermelho
+final float MAX_VELOCIDADE = 10;
+final color corDoCarro = #FF0000; // Vermelho
 float escala = 1;
 
 float deslocamento;
@@ -9,6 +10,7 @@ float velocidade;
 void setup()
 {  
   size(800, 600);
+  surface.setTitle("Meu carro");
   surface.setResizable(true);
   
   deslocamento = 0;
@@ -16,13 +18,13 @@ void setup()
   frameRate(60);
 }
 
-void draw()
-{  
+void draw() //<>//
+{ 
   // Deslocamento do carro
   if (keyPressed) {
-    if (keyCode == RIGHT)
+    if (keyCode == RIGHT && velocidade < MAX_VELOCIDADE)
       velocidade += .5;
-    else if (keyCode == LEFT)
+    else if (keyCode == LEFT && velocidade > -MAX_VELOCIDADE)
       velocidade -= .5;
     else if (key == '+')
       escala += 0.01;
@@ -45,7 +47,7 @@ void draw()
   // Faixas
   fill(#BCB34C);
   
-  for (int i = 0; i < width/100/escala; i++) {
+  for (int i = 0; i < width *   escala; i++) {
     rect(100 * i * escala, 500 * escala, 50 * escala, 15 * escala);
   }
   
